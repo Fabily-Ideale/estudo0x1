@@ -4,27 +4,26 @@ import matplotlib.pyplot as plt
 from sklearn.neural_network import MLPClassifier
 
 # %%
-entradas = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-alvos = np.array([0, 1, 1, 0])
+X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+y = np.array([0, 1, 1, 0])
 
 # %%
 modelo_mlp = MLPClassifier(
     hidden_layer_sizes=(4,),
-    activation='relu',
+    activation='relu', # Infelizmente não temos "leaky ReLU" no scikit-learn
     solver='adam',
     max_iter=2000,
     learning_rate_init=0.01,
-    random_state=42
 )
 
 # %%
-modelo_mlp.fit(entradas, alvos)
+modelo_mlp.fit(X, y)
 
 # %%
-previsoes = modelo_mlp.predict(entradas)
-score = modelo_mlp.score(entradas, alvos)
+previsoes = modelo_mlp.predict(X)
+score = modelo_mlp.score(X, y)
 
-print(f"Entradas:\n{entradas}")
+print(f"Entradas:\n{X}")
 print(f"Previsões: {previsoes}")
 print(f"Acurácia Final: {score * 100}%")
 
